@@ -1,0 +1,122 @@
+.cart-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 1.7rem;
+    color: #2563eb;
+    font-size: 2.5rem;
+  }
+
+  .cart-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #ddd;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    .total strong{
+      font-weight: bold;
+      color: #f71212;
+      font-size: 1.4rem;
+      margin-top: 1.5rem;
+
+      .total i {
+        font-size: 1.2rem;
+      }
+    }
+  }
+
+  .empty-cart {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #6b7280;
+  }
+
+  img {
+    margin-right: 0.8rem;
+    vertical-align: middle;
+    border-radius: 4px;
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+// Trash icon button
+.remove-icon {
+  font-size: 1.5rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  &:hover {
+    color: #dc2626;
+    background-color: transparent;
+    border: 1px solid #dc2626;
+  }
+}
+
+/* ========== Responsive Design ========== */
+@media (max-width: 768px) {
+  .cart-container {
+    max-width: 90%;
+    padding: 1.5rem;
+
+    h2 {
+      font-size: 2rem;
+    }
+
+    .cart-footer {
+      flex-direction: column;
+      align-items: flex-start;
+
+      .total {
+        font-size: 1.2rem;
+        text-align: left;
+      }
+
+      button {
+        width: 100%;
+      }
+    }
+  }
+
+  .remove-icon {
+    font-size: 1.3rem;
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cart-container {
+    padding: 1rem;
+
+    h2 {
+      font-size: 1.7rem;
+    }
+
+    .cart-footer {
+      .total {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .remove-icon {
+    width: 1.8rem;
+    height: 1.8rem;
+    font-size: 1.1rem;
+  }
+}

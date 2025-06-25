@@ -1,0 +1,82 @@
+<div class="register-container">
+  <h2>Create Account</h2>
+
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Name <span style="color: red">*</span> :</label>
+      <input
+        id="name"
+        type="text"
+        pInputText
+        formControlName="name"
+        placeholder="Enter you name"
+      />
+      <small
+        class="error"
+        *ngIf="registerForm.get('name')?.errors?.['required'] &&
+        registerForm.get('name')?.touched"
+      >
+        Name is required
+      </small>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email <span style="color: red">*</span> :</label>
+      <input
+        id="email"
+        type="email"
+        pInputText
+        formControlName="email"
+        placeholder="Enter your email"
+      />
+      <small
+        class="error"
+        *ngIf="registerForm.get('email')?.errors?.['required'] &&
+        registerForm.get('email')?.touched"
+      >
+        Email is required
+      </small>
+      <small
+        class="error"
+        *ngIf="registerForm.get('email')?.errors?.['email'] &&
+        registerForm.get('email')?.touched"
+      >
+        Invalid email format
+      </small>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password <span style="color: red">*</span> :</label>
+      <input
+        id="password"
+        type="password"
+        pInputText
+        formControlName="password"
+        placeholder="Enter password"
+      />
+      <small
+        class="error"
+        *ngIf="
+        registerForm.get('password')?.errors?.['required'] &&
+        registerForm.get('password')?.touched
+      "
+      >
+        Password is required
+      </small>
+      <small
+        class="error"
+        *ngIf="registerForm.get('password')?.errors?.['minlength']
+      && registerForm.get('password')?.touched"
+      >
+        Minimum 6 characters required
+      </small>
+    </div>
+
+    <button
+      pButton
+      type="submit"
+      label="Register"
+      [disabled]="registerForm.invalid"
+    ></button>
+  </form>
+</div>

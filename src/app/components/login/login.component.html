@@ -1,0 +1,65 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="auth-form">
+  <h2>Login!</h2>
+  <!-- Email Input -->
+  <div class="form-group">
+    <label for="email">Email <span style="color: red">*</span> :</label>
+    <input
+      id="email"
+      type="email"
+      formControlName="email"
+      placeholder="Enter your email"
+    />
+    <small
+      class="error"
+      *ngIf="loginForm.get('email')?.errors?.['required']
+    && loginForm.get('email')?.touched"
+    >
+      Email is required
+    </small>
+    <small
+      class="error"
+      *ngIf="loginForm.get('email')?.errors?.['email']
+    && loginForm.get('email')?.touched"
+    >
+      Invalid email format
+    </small>
+  </div>
+
+  <!-- Password Input -->
+  <div class="form-group">
+    <label for="password">Password <span style="color: red">*</span> :</label>
+    <input
+      id="password"
+      type="password"
+      formControlName="password"
+      placeholder="Enter your password"
+    />
+    <small
+      class="error"
+      *ngIf="
+        loginForm.get('password')?.errors?.['required'] &&
+        loginForm.get('password')?.touched
+      "
+    >
+      Password is required
+    </small>
+    <small
+      class="error"
+      *ngIf="loginForm.get('password')?.errors?.['minlength']
+      && loginForm.get('password')?.touched"
+    >
+      Minimum 6 characters required
+    </small>
+  </div>
+
+  <!-- Login Button -->
+  <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">
+    Login
+  </button>
+
+  <!-- Register Link -->
+  <p class="link-text">
+    Don't have an account?
+    <a routerLink="/register">Register</a>
+  </p>
+</form>

@@ -1,0 +1,15 @@
+<!-- Navbar Component Template -->
+<p-menubar [model]="menuItems">
+  <ng-template pTemplate="start">
+    <span class="text-xl font-bold conta">eCommerce</span>
+  </ng-template>
+  <ng-template pTemplate="end">
+    <button
+      class="cart-badge-button"
+      *ngIf="cartItemCount > 0"
+      (click)="goToCheckout()"
+    >
+      <p-badge [value]="cartItemCount" severity="danger"></p-badge>
+    </button>
+  </ng-template>
+</p-menubar>

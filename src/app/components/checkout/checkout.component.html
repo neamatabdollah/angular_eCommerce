@@ -1,0 +1,55 @@
+<div class="container">
+  <h2>Checkout</h2>
+
+  <div *ngIf="cartItems.length > 0; else emptyCart">
+    <div *ngFor="let item of cartItems" class="checkout-item">
+      <p>
+        <strong>{{ item.product.title }}:</strong>
+        <span
+          >{{ item.quantity }} x {{ item.product.price | currencyEgp }}</span
+        >
+      </p>
+    </div>
+
+    <h3>
+      <strong>Total :</strong>
+      <span>{{ total | currencyEgp }}</span>
+    </h3>
+
+    <form class="checkout-form">
+      <input
+        type="text"
+        placeholder="Full Name"
+        [(ngModel)]="name"
+        name="name"
+        pInputText
+      />
+      <input
+        type="text"
+        placeholder="Address"
+        [(ngModel)]="address"
+        name="address"
+        pInputText
+      />
+      <input
+        type="text"
+        placeholder="Phone Number"
+        [(ngModel)]="phone"
+        name="phone"
+        pInputText
+      />
+
+      <button
+        pButton
+        type="button"
+        label="Place Order"
+        (click)="placeOrder()"
+        class="mt-2 w-full"
+      ></button>
+    </form>
+  </div>
+
+  <ng-template #emptyCart>
+    <p>Your cart is empty. <a routerLink="/products">Continue shopping</a></p>
+  </ng-template>
+</div>
