@@ -1,6 +1,83 @@
+// Remove extra styling
+:host ::ng-deep .p-button.p-button-text {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+:host ::ng-deep .p-button.p-button-text:hover {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+  color: #2563eb !important;
+  transition: background-color 0.3s ease;
+}
+
+// Navbar container
+:host ::ng-deep .p-menubar {
+  background-color: #ffffff;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  border-radius: 0 0 10px 10px;
+  padding: 0.5rem 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+
+.navbar-content {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+// Logo style
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2563eb;
+}
+
+// Hover effect on menu items
+:host ::ng-deep .p-menubar .p-menuitem-link {
+  transition: color 0.3s ease;
+}
+
+:host ::ng-deep .p-menubar .p-menuitem-link:hover {
+  color: #2563eb;
+}
+
+// Highlight active link
+:host ::ng-deep .p-menuitem-link.active-link {
+  font-weight: bold;
+  color: #2563eb !important;
+  background-color: rgba(37, 99, 235, 0.1) !important;
+  border-radius: 6px;
+}
+// Smooth hover effect
+:host ::ng-deep .p-menuitem-link:hover {
+  background-color: rgba(37, 99, 235, 0.05) !important;
+  color: #2563eb !important;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+// Adjust spacing
+:host ::ng-deep .p-menubar .p-menuitem {
+  margin-right: 0.75rem;
+}
+
+// Cart button styling
 .cart-badge-button {
   background: none;
   border: none;
   cursor: pointer;
   padding: 0;
+}
+
+// Dark mode support
+:host-context(.dark-theme) .p-menubar {
+  background-color: #1f2937;
+}
+
+:host-context(.dark-theme) .logo {
+  color: #60a5fa;
 }

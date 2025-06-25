@@ -1,15 +1,25 @@
-<!-- Navbar Component Template -->
-<p-menubar [model]="menuItems">
+<p-menubar [model]="menuItems" styleClass="custom-menubar">
   <ng-template pTemplate="start">
-    <span class="text-xl font-bold conta">eCommerce</span>
+    <div class="navbar-content">
+      <span class="logo">eCommerce</span>
+    </div>
   </ng-template>
+
   <ng-template pTemplate="end">
-    <button
-      class="cart-badge-button"
-      *ngIf="cartItemCount > 0"
-      (click)="goToCheckout()"
-    >
-      <p-badge [value]="cartItemCount" severity="danger"></p-badge>
-    </button>
+    <div class="navbar-content">
+      <button
+        class="cart-badge-button"
+        *ngIf="cartItemCount > 0"
+        (click)="goToCheckout()"
+      >
+        <p-badge [value]="cartItemCount" severity="danger"></p-badge>
+      </button>
+
+      <p-button
+        [label]="isDarkMode ? '☀️ Light Mode' : '🌙 Dark Mode'"
+        class="p-button-sm "
+        (click)="toggleTheme()"
+      ></p-button>
+    </div>
   </ng-template>
 </p-menubar>
