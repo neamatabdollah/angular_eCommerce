@@ -1,25 +1,57 @@
-<p-menubar [model]="menuItems" styleClass="custom-menubar">
-  <ng-template pTemplate="start">
-    <div class="navbar-content">
-      <span class="logo">eCommerce</span>
-    </div>
-  </ng-template>
+<nav class="custom-navbar">
+  <div class="navbar-content">
+    <span class="logo">eCommerce</span>
+  </div>
 
-  <ng-template pTemplate="end">
-    <div class="navbar-content">
-      <button
-        class="cart-badge-button"
-        *ngIf="cartItemCount > 0"
-        (click)="goToCheckout()"
-      >
-        <p-badge [value]="cartItemCount" severity="danger"></p-badge>
-      </button>
+  <div class="nav-menu">
+    <a
+      routerLink="/login"
+      class="nav-link"
+      [class.active-link]="isActiveRoute('/login')"
+    >
+      <i class="pi pi-sign-in"></i>
+      Login
+    </a>
+    <a
+      routerLink="/register"
+      class="nav-link"
+      [class.active-link]="isActiveRoute('/register')"
+    >
+      <i class="pi pi-user-plus"></i>
+      Register
+    </a>
+    <a
+      routerLink="/products"
+      class="nav-link"
+      [class.active-link]="isActiveRoute('/products')"
+    >
+      <i class="pi pi-shopping-bag"></i>
+      Products
+    </a>
+    <a
+      routerLink="/cart"
+      class="nav-link"
+      [class.active-link]="isActiveRoute('/cart')"
+    >
+      <i class="pi pi-shopping-cart"></i>
+      Cart
+    </a>
+  </div>
 
-      <p-button
-        [label]="isDarkMode ? '☀️ Light Mode' : '🌙 Dark Mode'"
-        class="p-button-sm "
-        (click)="toggleTheme()"
-      ></p-button>
-    </div>
-  </ng-template>
-</p-menubar>
+  <div class="navbar-content">
+    <button
+      class="cart-badge-button"
+      *ngIf="cartItemCount > 0"
+      (click)="goToCheckout()"
+    >
+      <p-badge [value]="cartItemCount" styleClass="custom-badge"></p-badge>
+      <span>🛒</span>
+    </button>
+
+    <p-button
+      [label]="isDarkMode ? '☀️ Light Mode' : '🌙 Dark Mode'"
+      class="p-button-sm"
+      (click)="toggleTheme()"
+    ></p-button>
+  </div>
+</nav>

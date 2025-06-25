@@ -1,28 +1,15 @@
-// Remove extra styling
-:host ::ng-deep .p-button.p-button-text {
-  background-color: transparent !important;
-  box-shadow: none !important;
-  border: none !important;
-}
-
-:host ::ng-deep .p-button.p-button-text:hover {
-  background-color: rgba(0, 0, 0, 0.05) !important;
-  color: #2563eb !important;
-  transition: background-color 0.3s ease;
-}
-
-// Navbar container
-:host ::ng-deep .p-menubar {
+.custom-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background-color: #ffffff;
-  border: none;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
   border-radius: 0 0 10px 10px;
-  padding: 0.5rem 1.5rem;
+  padding: 0.9rem 1.5rem;
   position: sticky;
   top: 0;
   z-index: 1000;
 }
-
 
 .navbar-content {
   display: flex;
@@ -30,54 +17,107 @@
   gap: 1.5rem;
 }
 
-// Logo style
+.nav-menu {
+  display: flex;
+  gap: 1rem;
+}
+
 .logo {
   font-size: 1.5rem;
   font-weight: bold;
   color: #2563eb;
 }
 
-// Hover effect on menu items
-:host ::ng-deep .p-menubar .p-menuitem-link {
-  transition: color 0.3s ease;
-}
-
-:host ::ng-deep .p-menubar .p-menuitem-link:hover {
-  color: #2563eb;
-}
-
-// Highlight active link
-:host ::ng-deep .p-menuitem-link.active-link {
-  font-weight: bold;
-  color: #2563eb !important;
-  background-color: rgba(37, 99, 235, 0.1) !important;
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+  color: #374151;
   border-radius: 6px;
-}
-// Smooth hover effect
-:host ::ng-deep .p-menuitem-link:hover {
-  background-color: rgba(37, 99, 235, 0.05) !important;
-  color: #2563eb !important;
-  border-radius: 6px;
-  transition: background-color 0.3s ease;
-}
-// Adjust spacing
-:host ::ng-deep .p-menubar .p-menuitem {
-  margin-right: 0.75rem;
+  transition: all 0.3s ease;
+  font-weight: 500;
+
+  &:hover {
+    background-color: rgba(37, 99, 235, 0.1);
+    color: #2563eb;
+  }
+
+  &.active-link {
+    background-color: #2563eb;
+    color: #ffffff !important;
+    font-weight: bold;
+  }
 }
 
-// Cart button styling
+//cart icon style
 .cart-badge-button {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0;
+  margin-right: 1rem;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: relative;
+  font-size: 1.6rem;
+}
+::ng-deep .custom-badge {
+  background-color: #ef4444 !important;
+  color: white !important;
+  font-size: 1rem !important;
+  width: 25px !important;
+  height: 25px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 50% !important;
+  position: absolute;
+  top: -11px;
+  right: -10px;
+  padding: 0 !important;
+  font-weight: bold;
+  transition: transform 0.3s ease;
+
+}
+.cart-badge-button span {
+  font-size: 1.8rem;
+  color: #2563eb;
+}
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+::ng-deep .custom-badge.animate {
+  animation: bounce 0.4s ease;
 }
 
-// Dark mode support
-:host-context(.dark-theme) .p-menubar {
+
+
+//-----------------//
+:host-context(.dark-theme) .custom-navbar {
   background-color: #1f2937;
 }
 
 :host-context(.dark-theme) .logo {
   color: #60a5fa;
+}
+
+:host-context(.dark-theme) .nav-link {
+  color: #d1d5db;
+}
+
+:host-context(.dark-theme) .nav-link:hover {
+  background-color: rgba(96, 165, 250, 0.1);
+  color: #60a5fa;
+}
+
+:host-context(.dark-theme) .nav-link.active-link {
+  background-color: #60a5fa;
+  color: #1f2937;
 }

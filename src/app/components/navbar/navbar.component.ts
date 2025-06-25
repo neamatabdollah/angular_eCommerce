@@ -1,24 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuItem } from 'primeng/api';
 import { CartService } from '../../services/cart.service';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { MenubarModule } from 'primeng/menubar';
 import { BadgeModule } from 'primeng/badge';
-import { ThemeService } from '../../services/theme.service';
 import { ButtonModule } from 'primeng/button';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, MenubarModule, BadgeModule, ButtonModule],
+  imports: [CommonModule, RouterModule, BadgeModule, ButtonModule],
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.scss'
+  styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent implements OnInit {
-  menuItems: MenuItem[] = [];
   cartItemCount = 0;
+  previousItemCount = 0;
   isDarkMode = false;
+  currentRoute = '';
 
   constructor(
     private cartService: CartService,
@@ -27,54 +26,27 @@ export class NavbarComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // Subscribe to cart changes
     this.cartService.cart$.subscribe(items => {
-      this.cartItemCount = items.reduce((count, item) => count + item.quantity, 0);
+      const newCount = items.reduce((count, item) => count + item.quantity, 0);
+
+      const badge = document.querySelector('.custom-badge');
+      if (badge) {
+        badge.classList.remove('animate');
+        void (badge as HTMLElement).offsetWidth;
+        badge.classList.add('animate');
+      }
+
+      this.cartItemCount = newCount;
     });
 
-    // Update menuItems based on current route
-    this.updateMenuItems();
-
-    // Subscribe to route changes to update active link
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        this.updateMenuItems();
+        this.currentRoute = event.urlAfterRedirects;
       }
     });
 
-    // Theme
+    this.currentRoute = this.router.url;
     this.isDarkMode = this.themeService.isDarkMode();
-  }
-
-  updateMenuItems() {
-    const currentUrl = this.router.url;
-
-    this.menuItems = [
-      {
-        label: 'Products',
-        icon: 'pi pi-shopping-bag',
-        routerLink: '/products',
-        styleClass: currentUrl === '/products' ? 'active-link' : ''
-      },
-      {
-        label: 'Login',
-        icon: 'pi pi-sign-in',
-        routerLink: '/login',
-        styleClass: currentUrl === '/login' ? 'active-link' : ''
-      },
-      {
-        label: 'Register',
-        icon: 'pi pi-user-plus',
-        routerLink: '/register',
-        styleClass: currentUrl === '/register' ? 'active-link' : ''
-      },
-      {
-        label: 'Cart',
-        icon: 'pi pi-shopping-cart',
-        routerLink: '/cart',
-        styleClass: currentUrl === '/cart' ? 'active-link' : ''
-      }
-    ];
   }
 
   goToCheckout() {
@@ -85,5 +57,10 @@ export class NavbarComponent implements OnInit {
     this.themeService.toggleTheme();
     this.isDarkMode = this.themeService.isDarkMode();
   }
-}
 
+  isActiveRoute(route: string): boolean {
+    return route === '/products'
+      ? this.currentRoute === '/' || this.currentRoute === '/products'
+      : this.currentRoute === route;
+  }
+}
