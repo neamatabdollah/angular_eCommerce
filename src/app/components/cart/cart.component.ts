@@ -1,5 +1,4 @@
-import { MessageService } from 'primeng/api';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CartService } from '../../services/cart.service';
 import { CartItem } from '../../interfaces/product.interface';
 import { CommonModule } from '@angular/common';
@@ -7,8 +6,9 @@ import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { Router } from '@angular/router';
-import { FormsModule, NgModel } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { CurrencyEgpPipe } from '../../pipes/currency-egp.pipe';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-cart',
@@ -27,11 +27,9 @@ import { CurrencyEgpPipe } from '../../pipes/currency-egp.pipe';
 export class CartComponent implements OnInit {
   cartItems: CartItem[] = [];
 
-  constructor(
-    private cartService: CartService,
-    private router: Router,
-    private messageService: MessageService
-  ) {}
+  private cartService = inject(CartService);
+  private router = inject(Router);
+  private messageService = inject(MessageService);
 
   ngOnInit() {
     this.cartItems = this.cartService.getCartItems();
@@ -52,7 +50,6 @@ export class CartComponent implements OnInit {
       life: 3000
     });
   }
-
 
   getTotalPrice(): number {
     return this.cartService.getTotalPrice();

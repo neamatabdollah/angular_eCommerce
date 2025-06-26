@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CartService } from '../../services/cart.service';
 import { Router, NavigationEnd, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -19,11 +19,9 @@ export class NavbarComponent implements OnInit {
   isDarkMode = false;
   currentRoute = '';
 
-  constructor(
-    private cartService: CartService,
-    private router: Router,
-    private themeService: ThemeService
-  ) {}
+  private cartService = inject(CartService);
+  private router = inject(Router);
+  private themeService = inject(ThemeService);
 
   ngOnInit() {
     this.cartService.cart$.subscribe(items => {
@@ -49,7 +47,6 @@ export class NavbarComponent implements OnInit {
     this.isDarkMode = this.themeService.isDarkMode();
   }
 
-  // go to cart not checkout
   goToCheckout() {
     this.router.navigate(['/cart']);
   }

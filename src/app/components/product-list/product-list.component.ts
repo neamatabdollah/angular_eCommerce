@@ -1,5 +1,4 @@
-// Product List Component
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Product } from '../../interfaces/product.interface';
 import { ProductService } from '../../services/product.service';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
@@ -8,7 +7,8 @@ import { NgFor, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-product-list',
-  imports: [NgIf,NgFor,ProgressSpinnerModule, ProductCardComponent],
+  standalone: true,
+  imports: [NgIf, NgFor, ProgressSpinnerModule, ProductCardComponent],
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss']
 })
@@ -16,7 +16,7 @@ export class ProductListComponent implements OnInit {
   products: Product[] = [];
   loading = true;
 
-  constructor(private productService: ProductService) {}
+  private productService = inject(ProductService);
 
   ngOnInit() {
     this.loadProducts();
@@ -28,8 +28,7 @@ export class ProductListComponent implements OnInit {
         this.products = response.products;
         this.loading = false;
       },
-      error: (error) => {
-        console.error('Error loading products:', error);
+      error: () => {
         this.loading = false;
       }
     });

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CartService } from '../../services/cart.service';
 import { CartItem } from '../../interfaces/product.interface';
 import { CommonModule } from '@angular/common';
@@ -10,19 +10,25 @@ import { InputTextModule } from 'primeng/inputtext';
 @Component({
   selector: 'app-checkout',
   standalone: true,
-  imports: [CommonModule, FormsModule, CurrencyEgpPipe, ButtonModule, InputTextModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    CurrencyEgpPipe,
+    ButtonModule,
+    InputTextModule
+  ],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.scss'
 })
 export class CheckoutComponent implements OnInit {
+  private cartService = inject(CartService); 
+
   cartItems: CartItem[] = [];
   total = 0;
 
   name = '';
   address = '';
   phone = '';
-
-  constructor(private cartService: CartService) {}
 
   ngOnInit() {
     this.cartItems = this.cartService.getCartItems();

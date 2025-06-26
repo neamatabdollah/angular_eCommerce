@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -13,16 +13,16 @@ import { ButtonModule } from 'primeng/button';
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
-  registerForm: FormGroup;
-  submitted = false;
+  private fb = inject(FormBuilder);
+  private router = inject(Router);
 
-  constructor(private fb: FormBuilder, private router: Router) {
-    this.registerForm = this.fb.group({
-      name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
-    });
-  }
+  registerForm: FormGroup = this.fb.group({
+    name: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(6)]]
+  });
+
+  submitted = false;
 
   get f() {
     return this.registerForm.controls;

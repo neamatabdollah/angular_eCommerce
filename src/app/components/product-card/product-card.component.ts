@@ -1,4 +1,4 @@
-import { Component, Input, input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { Product } from '../../interfaces/product.interface';
 import { Router } from '@angular/router';
 import { CartService } from '../../services/cart.service';
@@ -12,9 +12,9 @@ import { WishlistService } from '../../services/wishlist.service';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 
-
 @Component({
   selector: 'app-product-card',
+  standalone: true,
   imports: [
     CommonModule,
     FormsModule,
@@ -32,17 +32,16 @@ export class ProductCardComponent {
   @Input() product!: Product;
   isWishlisted = false;
 
-  constructor(
-    private router: Router,
-    private cartService: CartService,
-    private wishlistService: WishlistService,
-    private messageService: MessageService
-  ) {}
+  private router = inject(Router);
+  private cartService = inject(CartService);
+  private wishlistService = inject(WishlistService);
+  private messageService = inject(MessageService);
 
   ngOnInit() {
     this.isWishlisted = this.wishlistService.isInWishlist(this.product.id);
   }
-  onProductClick(){
+
+  onProductClick() {
     this.router.navigate(['/product', this.product.id]);
   }
 
@@ -57,7 +56,6 @@ export class ProductCardComponent {
       life: 3000
     });
   }
-
 
   toggleWishlist(event: Event): void {
     event.stopPropagation();
@@ -82,5 +80,4 @@ export class ProductCardComponent {
 
     this.isWishlisted = !this.isWishlisted;
   }
-
 }

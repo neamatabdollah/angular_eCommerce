@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Product } from '../../interfaces/product.interface';
 import { WishlistService } from '../../services/wishlist.service';
 import { CurrencyEgpPipe } from '../../pipes/currency-egp.pipe';
@@ -6,14 +6,14 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-wishlist',
-  imports: [CurrencyEgpPipe,CommonModule],
+  imports: [CurrencyEgpPipe, CommonModule],
   templateUrl: './wishlist.component.html',
   styleUrl: './wishlist.component.scss'
 })
 export class WishlistComponent {
-  wishlist: Product[] = [];
+  private wishlistService = inject(WishlistService);
 
-  constructor(private wishlistService: WishlistService) {}
+  wishlist: Product[] = [];
 
   ngOnInit(): void {
     this.wishlist = this.wishlistService.getWishlist();
