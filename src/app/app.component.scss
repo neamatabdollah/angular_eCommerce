@@ -1,3 +1,8 @@
+
+// ==========================================
+// LAYOUT STYLES
+// ==========================================
+
 app-navbar {
   position: fixed;
   top: 0;
@@ -8,6 +13,6 @@ app-navbar {
 
 router-outlet {
   display: block;
-  margin-top: 5rem; // adjust based on your navbar height
+  margin-top: 5rem;
   padding: 1rem;
 }

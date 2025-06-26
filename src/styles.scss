@@ -1,4 +1,4 @@
-/* Global Styles */
+/* GLOBAL RESETS */
 * {
   margin: 0;
   padding: 0;
@@ -9,17 +9,13 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-body.light-mode {
-  background-color: #f9fafb;
-  color: #111827;
-}
-
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1rem;
 }
 
+/* PRODUCTS GRID */
 .products-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -27,11 +23,7 @@ body.light-mode {
   padding: 2rem 0;
 }
 
-.active-link {
-  color: #f97316 !important;
-  font-weight: 600;
-}
-
+/* PRODUCT DETAILS PAGE */
 .product-details-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -40,32 +32,151 @@ body.light-mode {
   max-width: 1200px;
   margin: 0 auto;
 }
+.content-container {
+  position: relative;
+  z-index: 10;
+}
 
 
-//dark mode styling
-body.dark-mode {
-  background-color: #1a1a1a;
-  color: #f3f3f3;
+/* ACTIVE LINK STYLE */
+.active-link {
+  color: #f97316 !important;
+  font-weight: 600;
+}
 
-  .p-menubar {
-    background-color: #262626;
+/* ===================================
+Morning + Night Animated Background
+====================================== */
+
+.animated-background {
+  min-height: 100vh;
+  background-size: 400% 400%;
+  animation: morningSkyShift 20s ease infinite;
+  padding-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+// Light Mode Background
+body:not(.dark-mode) .animated-background {
+  // background: linear-gradient(-45deg, #FFFBBD, #BDE0FE, #A2D2FF, #CDB4DB);
+  // animation: morningSkyShift 20s ease infinite;
+background: linear-gradient(-45deg, #FFECD2, #fcb69f, #A2D2FF, #CDB4DB);
+  animation: sunriseShift 20s ease-in-out infinite;
+}
+
+// Floating Clouds
+.cloud {
+  position: absolute;
+  background: url("data:image/svg+xml,%3Csvg width='64' height='64' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M47 30c0-6.075-4.925-11-11-11a10.985 10.985 0 0 0-8.98 4.476A8 8 0 0 0 20 30c0 4.418 3.582 8 8 8h11c4.418 0 8-3.582 8-8z' fill='%23ffffff'/%3E%3C/svg%3E") no-repeat center;
+  background-size: contain;
+  width: 120px;
+  height: 60px;
+  opacity: 0.4;
+  animation: floatClouds 60s linear infinite;
+  z-index: 5;
+}
+
+.cloud:nth-child(1) { top: 20%; left: -150px; animation-delay: 0s; }
+.cloud:nth-child(2) { top: 40%; left: -200px; animation-delay: 15s; }
+.cloud:nth-child(3) { top: 60%; left: -250px; animation-delay: 30s; }
+
+@keyframes floatClouds {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(120vw); }
+}
+
+// Dark Mode Background
+body.dark-mode .animated-background {
+  // background: linear-gradient(-45deg, #0F172A, #1E3A8A, #312E81, #3B0764);
+  // animation: nightSkyShift 30s ease infinite;
+
+  background: linear-gradient(-45deg, #0f172a, #1E3A8A, #3B0764, #000000);
+  animation: nightShift 30s ease-in-out infinite;
+}
+
+// Twinkling Stars
+.stars {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: url('https://www.transparenttextures.com/patterns/stardust.png') repeat top center;
+  animation: twinkle 100s linear infinite;
+  opacity: 0.4;
+  z-index: 4;
+  pointer-events: none;
+}
+
+@keyframes sunriseShift {
+  0%   { background-position: 0% 50%;}
+  50%  { background-position: 100% 50%; filter: brightness(1.05); }
+  100% { background-position: 0% 50%;}
+}
+
+@keyframes nightShift {
+  0%   { background-position: 0% 0%; }
+  50%  { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
+}
+
+
+@keyframes twinkle {
+  from { background-position: 0 0; }
+  to   { background-position: -10000px 5000px; }
+}
+
+.sun {
+  position: absolute;
+  top: 5%;
+  left: -2%;
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, #FFD700 0%, #FFA500 80%);
+  border-radius: 50%;
+  animation: pulse 5s ease-in-out infinite;
+  z-index: 2;
+}
+body.dark-mode .sun {
+  display: none;
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(1.05); opacity: 1; }
+}
+
+.moon {
+  position: absolute;
+  top: 10%;
+  right: 10%;
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle, #f9fafb 30%, #d1d5db 80%);
+  border-radius: 50%;
+  z-index: 2;
+  animation: moonPulse 6s ease-in-out infinite;
+}
+@keyframes moonPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+    box-shadow: 0 0 10px #f9fafb;
   }
-
-  .p-menuitem-link {
-    color: #f3f3f3 !important;
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+    box-shadow: 0 0 20px #ffffff;
   }
+}
 
-  .p-card,
-  .cart-container,
-  .checkout-container,
-  .register-container {
-    background-color: #2c2c2c;
-    color: #f3f3f3;
-  }
+body:not(.dark-mode) .moon {
+  display: none;
 }
 
 
 
+/* RESPONSIVE */
 @media (max-width: 768px) {
   .product-details-container {
     grid-template-columns: 1fr;
@@ -75,3 +186,4 @@ body.dark-mode {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   }
 }
+
