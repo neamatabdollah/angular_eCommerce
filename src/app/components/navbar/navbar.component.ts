@@ -49,8 +49,9 @@ export class NavbarComponent implements OnInit {
     this.isDarkMode = this.themeService.isDarkMode();
   }
 
+  // go to cart not checkout
   goToCheckout() {
-    this.router.navigate(['/checkout']);
+    this.router.navigate(['/cart']);
   }
 
   toggleTheme() {
