@@ -3,10 +3,11 @@ import { Product } from '../../interfaces/product.interface';
 import { WishlistService } from '../../services/wishlist.service';
 import { CurrencyEgpPipe } from '../../pipes/currency-egp.pipe';
 import { CommonModule } from '@angular/common';
+import { EmptyStateComponent } from '../emptystate/emptystate.component';
 
 @Component({
   selector: 'app-wishlist',
-  imports: [CurrencyEgpPipe, CommonModule],
+  imports: [CurrencyEgpPipe, CommonModule,EmptyStateComponent],
   templateUrl: './wishlist.component.html',
   styleUrl: './wishlist.component.scss'
 })

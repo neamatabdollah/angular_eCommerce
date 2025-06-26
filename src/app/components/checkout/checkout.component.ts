@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { CurrencyEgpPipe } from '../../pipes/currency-egp.pipe';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { EmptyStateComponent } from '../emptystate/emptystate.component';
 
 @Component({
   selector: 'app-checkout',
@@ -15,13 +16,14 @@ import { InputTextModule } from 'primeng/inputtext';
     FormsModule,
     CurrencyEgpPipe,
     ButtonModule,
-    InputTextModule
+    InputTextModule,
+    EmptyStateComponent
   ],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.scss'
 })
 export class CheckoutComponent implements OnInit {
-  private cartService = inject(CartService); 
+  private cartService = inject(CartService);
 
   cartItems: CartItem[] = [];
   total = 0;

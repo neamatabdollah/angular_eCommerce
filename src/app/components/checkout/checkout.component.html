@@ -52,10 +52,12 @@
     </form>
   </div>
   } @else {
-  <div class="empty-wishlist">
-    <img src="../../../assets/imgs/empty-wishlist.svg" alt="Empty Wishlist" />
-    <p>No items in your checkout yet.</p>
-    <a routerLink="/products" class="btn-shop">Browse Products</a>
-  </div>
+  <app-empty-state
+    image="../../../assets/imgs/empty-wishlist.svg"
+    alt="Empty Wishlist"
+    message="No items in your checkout yet."
+    link="/products"
+    linkText="Browse Products"
+  />
   }
 </div>
