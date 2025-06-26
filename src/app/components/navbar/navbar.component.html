@@ -4,6 +4,7 @@
   </div>
 
   <div class="nav-menu">
+    <!-- login link -->
     <a
       routerLink="/login"
       class="nav-link"
@@ -12,6 +13,7 @@
       <i class="pi pi-sign-in"></i>
       Login
     </a>
+    <!-- register link -->
     <a
       routerLink="/register"
       class="nav-link"
@@ -20,6 +22,7 @@
       <i class="pi pi-user-plus"></i>
       Register
     </a>
+    <!-- products link -->
     <a
       routerLink="/products"
       class="nav-link"
@@ -28,6 +31,7 @@
       <i class="pi pi-shopping-bag"></i>
       Products
     </a>
+    <!-- checkout link -->
     <a
       routerLink="/checkout"
       class="nav-link"
@@ -36,17 +40,27 @@
       <i class="pi pi-shopping-cart"></i>
       Checkout
     </a>
+    <!-- wishlist link -->
+    <a
+      routerLink="/wishlist"
+      class="nav-link"
+      [class.active-link]="isActiveRoute('/wishlist')"
+    >
+      <i class="pi pi-heart-fill"></i>
+      Wishlist
+    </a>
   </div>
 
   <div class="navbar-content">
-    <button
-      class="cart-badge-button"
-      *ngIf="cartItemCount > 0"
-      (click)="goToCheckout()"
-    >
-      <p-badge [value]="cartItemCount" styleClass="custom-badge"></p-badge>
-      <span>🛒</span>
-    </button>
+    @if (cartItemCount > 0) {
+      <button
+        class="cart-badge-button"
+        (click)="goToCheckout()"
+      >
+        <p-badge [value]="cartItemCount" styleClass="custom-badge"></p-badge>
+        <span>🛒</span>
+      </button>
+    }
 
     <p-button
       [label]="isDarkMode ? '☀️ Light Mode' : '🌙 Dark Mode'"

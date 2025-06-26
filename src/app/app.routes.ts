@@ -8,7 +8,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { CartComponent } from './components/cart/cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { WishlistComponent } from './wishlist/wishlist.component';
+import { WishlistComponent } from './components/wishlist/wishlist.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },

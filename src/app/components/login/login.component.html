@@ -1,5 +1,6 @@
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="auth-form">
   <h2>Login!</h2>
+
   <!-- Email Input -->
   <div class="form-group">
     <label for="email">Email <span style="color: red">*</span> :</label>
@@ -9,20 +10,14 @@
       formControlName="email"
       placeholder="Enter your email"
     />
-    <small
-      class="error"
-      *ngIf="loginForm.get('email')?.errors?.['required']
-    && loginForm.get('email')?.touched"
-    >
-      Email is required
-    </small>
-    <small
-      class="error"
-      *ngIf="loginForm.get('email')?.errors?.['email']
-    && loginForm.get('email')?.touched"
-    >
-      Invalid email format
-    </small>
+
+    @if (loginForm.get('email')?.errors?.['required'] && loginForm.get('email')?.touched) {
+      <small class="error">Email is required</small>
+    }
+
+    @if (loginForm.get('email')?.errors?.['email'] && loginForm.get('email')?.touched) {
+      <small class="error">Invalid email format</small>
+    }
   </div>
 
   <!-- Password Input -->
@@ -34,22 +29,14 @@
       formControlName="password"
       placeholder="Enter your password"
     />
-    <small
-      class="error"
-      *ngIf="
-        loginForm.get('password')?.errors?.['required'] &&
-        loginForm.get('password')?.touched
-      "
-    >
-      Password is required
-    </small>
-    <small
-      class="error"
-      *ngIf="loginForm.get('password')?.errors?.['minlength']
-      && loginForm.get('password')?.touched"
-    >
-      Minimum 6 characters required
-    </small>
+
+    @if (loginForm.get('password')?.errors?.['required'] && loginForm.get('password')?.touched) {
+      <small class="error">Password is required</small>
+    }
+
+    @if (loginForm.get('password')?.errors?.['minlength'] && loginForm.get('password')?.touched) {
+      <small class="error">Minimum 6 characters required</small>
+    }
   </div>
 
   <!-- Login Button -->

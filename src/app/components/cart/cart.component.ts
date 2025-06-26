@@ -1,3 +1,4 @@
+import { MessageService } from 'primeng/api';
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../services/cart.service';
 import { CartItem } from '../../interfaces/product.interface';
@@ -26,7 +27,11 @@ import { CurrencyEgpPipe } from '../../pipes/currency-egp.pipe';
 export class CartComponent implements OnInit {
   cartItems: CartItem[] = [];
 
-  constructor(private cartService: CartService, private router: Router) {}
+  constructor(
+    private cartService: CartService,
+    private router: Router,
+    private messageService: MessageService
+  ) {}
 
   ngOnInit() {
     this.cartItems = this.cartService.getCartItems();
@@ -39,7 +44,15 @@ export class CartComponent implements OnInit {
   removeItem(productId: number) {
     this.cartService.removeFromCart(productId);
     this.cartItems = this.cartService.getCartItems(); // Refresh UI
+
+    this.messageService.add({
+      severity: 'warn',
+      summary: 'Removed!',
+      detail: 'Product has been removed from your cart.',
+      life: 3000
+    });
   }
+
 
   getTotalPrice(): number {
     return this.cartService.getTotalPrice();

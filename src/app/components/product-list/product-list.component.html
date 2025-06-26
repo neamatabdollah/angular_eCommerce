@@ -1,13 +1,15 @@
-<!-- Product List Component Template -->
 <div class="product-list-container">
   <h1>Our Products</h1>
-  
-  <p-progressSpinner *ngIf="loading"></p-progressSpinner>
-  
-  <div class="products-grid" *ngIf="!loading">
-    <app-product-card 
-      *ngFor="let product of products" 
-      [product]="product">
-    </app-product-card>
-  </div>
+
+  @if (loading) {
+    <p-progressSpinner></p-progressSpinner>
+  }
+
+  @if (!loading) {
+    <div class="products-grid">
+      @for (product of products; track product.id) {
+        <app-product-card [product]="product"></app-product-card>
+      }
+    </div>
+  }
 </div>

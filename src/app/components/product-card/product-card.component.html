@@ -1,21 +1,35 @@
-<!-- Product Card Component Template -->
 <p-card
   [header]="product.title"
   [subheader]="product.brand"
   styleClass="product-card"
   (click)="onProductClick()"
 >
+  <!-- product img + title  -->
   <ng-template pTemplate="header">
-    <img
-      [src]="product.thumbnail"
-      [alt]="product.title"
-      class="product-image"
-    />
+    <div class="card-header-wrapper">
+      <img
+        [src]="product.thumbnail"
+        [alt]="product.title"
+        class="product-image"
+      />
+      <!-- wishlist icon -->
+      <span
+        class="wishlist-icon"
+        [ngClass]="{
+          filled: isWishlisted,
+          'out-of-stock': product.stock === 0
+        }"
+        (click)="toggleWishlist($event)"
+      >
+        <i class="pi pi-heart-fill"></i>
+      </span>
+    </div>
   </ng-template>
 
   <div class="product-info">
+    <!-- product price -->
     <div class="price">{{ product.price | currencyEgp }}</div>
-
+    <!-- product rating -->
     <div class="rating">
       <p-rating [ngModel]="product.rating" [readonly]="true"> </p-rating>
       <span class="rating-text">({{ product.rating }})</span>
@@ -31,7 +45,7 @@
       {{ product.stock > 0 ? "In Stock" : "Out of Stock" }}
     </div>
   </div>
-
+  <!-- add to cart button -->
   <ng-template pTemplate="footer">
     <p-button
       label="Add to Cart"

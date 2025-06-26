@@ -3,11 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { PrimeNG } from 'primeng/config';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ButtonModule, RouterOutlet,NavbarComponent],
+  imports: [ButtonModule, ToastModule, RouterOutlet,NavbarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

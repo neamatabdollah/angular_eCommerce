@@ -1,0 +1,25 @@
+<div class="wishlist-container">
+  <h2>Your Wishlist</h2>
+
+  @if (wishlist.length > 0) {
+    <div class="wishlist-grid">
+      @for (product of wishlist; track product.id) {
+        <div class="wishlist-card">
+          <img [src]="product.thumbnail" [alt]="product.title" />
+          <div class="wishlist-info">
+            <h3>{{ product.title }}</h3>
+            <p><strong>Brand:</strong> {{ product.brand }}</p>
+            <p><strong>Price:</strong> {{ product.price | currencyEgp }}</p>
+            <button (click)="removeItem(product.id)">Remove</button>
+          </div>
+        </div>
+      }
+    </div>
+  } @else {
+    <div class="empty-wishlist">
+      <img src="../../../assets/imgs/empty-wishlist.svg" alt="Empty Wishlist" />
+      <p>No items in your wishlist yet.</p>
+      <a routerLink="/products" class="btn-shop">Browse Products</a>
+    </div>
+  }
+</div>

@@ -1,8 +1,10 @@
 <div class="container">
   <h2>Checkout</h2>
 
-  <div *ngIf="cartItems.length > 0; else emptyCart">
-    <div *ngFor="let item of cartItems" class="checkout-item">
+  @if (cartItems.length > 0) {
+  <div>
+    @for (item of cartItems; track item.product.id) {
+    <div class="checkout-item">
       <p>
         <strong>{{ item.product.title }}:</strong>
         <span
@@ -10,6 +12,7 @@
         >
       </p>
     </div>
+    }
 
     <h3>
       <strong>Total :</strong>
@@ -48,8 +51,11 @@
       ></button>
     </form>
   </div>
-
-  <ng-template #emptyCart>
-    <p>Your cart is empty. <a routerLink="/products">Continue shopping</a></p>
-  </ng-template>
+  } @else {
+  <div class="empty-wishlist">
+    <img src="../../../assets/imgs/empty-wishlist.svg" alt="Empty Wishlist" />
+    <p>No items in your checkout yet.</p>
+    <a routerLink="/products" class="btn-shop">Browse Products</a>
+  </div>
+  }
 </div>

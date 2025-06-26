@@ -1,3 +1,4 @@
+import { MessageService } from 'primeng/api';
 // Product Details Component
 import { GalleriaModule } from 'primeng/galleria';
 import { Component, OnInit } from '@angular/core';
@@ -24,7 +25,7 @@ export class ProductDetailsComponent implements OnInit {
   product: Product | null = null;
   loading = true;
   quantity = 1;
-  
+
   responsiveOptions = [
     {
       breakpoint: '1024px',
@@ -43,7 +44,8 @@ export class ProductDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
-    private cartService: CartService
+    private cartService: CartService,
+    private messageService: MessageService
   ) {}
 
   ngOnInit() {
@@ -67,6 +69,14 @@ export class ProductDetailsComponent implements OnInit {
   addToCart() {
     if (this.product) {
       this.cartService.addToCart(this.product, this.quantity);
+
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Added to Cart!',
+        detail: `${this.product.title} (${this.quantity}) has been added to your cart.`,
+        life: 3000
+      });
     }
   }
+
 }

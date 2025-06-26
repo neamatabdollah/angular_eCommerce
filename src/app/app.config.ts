@@ -1,3 +1,4 @@
+import { MessageService } from 'primeng/api';
 import { RippleStyle } from './../../node_modules/primeng/ripple/style/ripplestyle.d';
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
@@ -13,6 +14,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(),
     provideAnimationsAsync(),
+    MessageService,
     providePrimeNG({
         theme: {
             preset: Aura,
@@ -23,7 +25,7 @@ export const appConfig: ApplicationConfig = {
         //     }
         },
         // ripple: true,
-        
+
 
     }),
   ]

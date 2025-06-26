@@ -1,57 +1,57 @@
 <div class="cart-container">
   <h2>Your Cart</h2>
 
-  <p-table
-    [value]="cartItems"
-    *ngIf="cartItems.length > 0"
-    class="p-datatable-striped"
-  >
-    <ng-template pTemplate="header">
-      <tr>
-        <th>Product</th>
-        <th>Price</th>
-        <th>Quantity</th>
-        <th>Subtotal</th>
-        <th>Remove</th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-item>
-      <tr>
-        <td>
-          <img [src]="item.product.thumbnail" width="50" />
-          {{ item.product.title }}
-        </td>
-        <td>{{ item.product.price  * item.quantity | currencyEgp }} </td>
-        <td>
-          <p-inputNumber
-            [(ngModel)]="item.quantity"
-            [min]="1"
-            [max]="item.product.stock"
-            (ngModelChange)="updateQuantity(item.product.id, item.quantity)"
-          ></p-inputNumber>
-        </td>
-        <td>{{ item.product.price * item.quantity | currencyEgp  }} </td>
-        <td>
-          <button
-            pButton
-            class=" remove-icon"
-            (click)="removeItem(item.product.id)"
-            aria-label="Remove Item"
-          >🗑️</button>
-        </td>
-      </tr>
-    </ng-template>
-  </p-table>
+  @if (cartItems.length > 0) {
+    <p-table [value]="cartItems" class="p-datatable-striped">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Subtotal</th>
+          <th>Remove</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-item>
+        <tr>
+          <td>
+            <img [src]="item.product.thumbnail" width="50" />
+            {{ item.product.title }}
+          </td>
+          <td>{{ item.product.price  * item.quantity | currencyEgp }} </td>
+          <td>
+            <p-inputNumber
+              [(ngModel)]="item.quantity"
+              [min]="1"
+              [max]="item.product.stock"
+              (ngModelChange)="updateQuantity(item.product.id, item.quantity)"
+            ></p-inputNumber>
+          </td>
+          <td>{{ item.product.price * item.quantity | currencyEgp }} </td>
+          <td>
+            <button
+              pButton
+              class="remove-icon"
+              (click)="removeItem(item.product.id)"
+              aria-label="Remove Item"
+            >🗑️</button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
 
-  <div class="cart-footer" *ngIf="cartItems.length > 0">
-    <div class="total"><strong>Total: </strong> <i>{{ getTotalPrice() | currencyEgp}}</i></div>
-    <button
-      pButton
-      label="Proceed to Checkout"
-      class="p-button-success"
-      (click)="goToCheckout()"
-    ></button>
-  </div>
-
-  <p *ngIf="cartItems.length === 0" class="empty-cart">Your cart is empty.</p>
+    <div class="cart-footer">
+      <div class="total">
+        <strong>Total: </strong> <i>{{ getTotalPrice() | currencyEgp }}</i>
+      </div>
+      <button
+        pButton
+        label="Proceed to Checkout"
+        class="p-button-success"
+        (click)="goToCheckout()"
+      ></button>
+    </div>
+  } @else {
+    <p class="empty-cart">Your cart is empty.</p>
+  }
 </div>
