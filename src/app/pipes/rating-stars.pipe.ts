@@ -6,8 +6,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class RatingStarsPipe implements PipeTransform {
 
   transform(value: number): string {
-  return '★'.repeat(Math.round(value)) + '☆'.repeat(5 - Math.round(value));
-}
-
-
+    return '★'.repeat(Math.round(value)) + '☆'.repeat(5 - Math.round(value));
+  }
 }
