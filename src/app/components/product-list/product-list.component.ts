@@ -8,9 +8,9 @@ import { NgFor, NgIf } from '@angular/common';
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [NgIf, NgFor, ProgressSpinnerModule, ProductCardComponent],
+  imports: [ProgressSpinnerModule, ProductCardComponent],
   templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.scss']
+  styleUrls: ['./product-list.component.scss'],
 })
 export class ProductListComponent implements OnInit {
   products: Product[] = [];
@@ -30,7 +30,7 @@ export class ProductListComponent implements OnInit {
       },
       error: () => {
         this.loading = false;
-      }
+      },
     });
   }
 }
